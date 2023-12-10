@@ -2,6 +2,8 @@ package com.tobeto.spring.b.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,6 +22,9 @@ public class Car
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+
+    @NotEmpty(message = "cannot be empty or null")
+    @Min(value = 1990)
     @Column(name="model_year")
     private int modelYear;
 
