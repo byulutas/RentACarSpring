@@ -2,14 +2,21 @@ package com.tobeto.spring.b.controllers;
 
 import com.tobeto.spring.b.entities.Car;
 import com.tobeto.spring.b.repositories.CarRepository;
+import com.tobeto.spring.b.services.abstracts.CarService;
+import com.tobeto.spring.b.services.dtos.carDtos.carResponse.lists.CarListDto;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 public class CarsController {
+
+    private final CarService carService;
     private final CarRepository carRepository;
     // final => ctor blok dışında set edemezsiniz.
 
-    public CarsController(CarRepository carRepository)
+    public CarsController(CarService carService, CarRepository carRepository)
     {
+        this.carService = carService;
         this.carRepository = carRepository;
     }
 
@@ -36,6 +43,11 @@ public class CarsController {
         carRepository.delete(carToDelete);
 
         //carRepository.deleteById(id);
+    }
+
+    @GetMapping("search")
+    public List<CarListDto> search (@RequestParam String modelName){
+        return this.carService.search(modelName);
     }
 
 }

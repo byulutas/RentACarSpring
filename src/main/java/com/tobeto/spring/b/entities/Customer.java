@@ -25,7 +25,7 @@ public class Customer {
     @Column(name = "registration_date")
     private Date registration_date;
 
-    @OneToMany(mappedBy = "customer") // attribute ismi
+    @OneToMany(mappedBy = "Customer") // attribute ismi
     @JsonIgnore // Bu alan jsona parse edilirken yok sayılacak.
     private List<Customer> customers;
 }
